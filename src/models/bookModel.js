@@ -1,41 +1,37 @@
 const mongoose = require("mongoose");
 
-const bookSchema = new mongoose.Schema(
-  {
-    bookName: {
-      type: String,
-      required: true
-    },
-    price:{
-      indianPrice: Number,
-      europeanPrice: Number
-    },
-    year: {
-      type: Number,
-      default: 2021,
-    },
-    tags: [],
-    authorName: String,
-    totalPages: Number,
-    stockAvailable: {
-      type: Boolean,
-      default: true,
-    },
-  }
-  // { timestamps: true }
-);
+const bookSchema = new mongoose.Schema({
+  bookName: {
+    type: String,
+    required: true,
+  },
+  price: {
+    indianPrice: String,
+    europeanPrice: String,
+  },
+  year: {
+    type: Number,
+    default: 2021,
+  },
+  tags: [],
+  authorName: String,
+  totalPages: Number,
+  stockAvailable: {
+    type: Boolean,
+    default: true,
+  },
+});
 
-module.exports = mongoose.model("Books Collection", bookSchema); //books
-
+module.exports = mongoose.model("Books Collection", bookSchema); //books collections
 
 // {
-//   "bookName": "A Tale of Two Cities",
+//   "bookName": "Thunderbolt",
 //   "price": {
-//       "indianPrice":"200",
-//       "europeanPrice":"20"
+//       "indianPrice":"300INR",
+//       "europeanPrice":"30Pound"
 //       },
-//   "year": "1943",
-//   "tags": ["Novel"],
-//   "authorName": "Antoine de Saint-Exupéry",
-//   "totalPages": "400"
+//   "year": "2022",
+//   "tags": ["Fiction"],
+//   "authorName": "Antoine Mary",
+//   "totalPages": "150"
 // }

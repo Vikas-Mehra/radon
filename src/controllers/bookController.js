@@ -15,68 +15,31 @@ const bookList = async function (req, res) {
 
 const getBooksInYear = async function (req, res) {
   const year = req.params.year;
-  let booksInYear = await bookModel.find({ year });
+  let booksInYear = await bookModel
+    .find({ year })
+    .select({ _id: 0, bookName: 1, year: 1 });
   res.send({ Book: booksInYear });
 };
 
 const getXINRBooks = async function (req, res) {
   let booksINR = await bookModel
-    .find({
-      $or: [
-        { "price.indianPrice": 100 },
-        { "price.indianPrice": 200 },
-        { "price.indianPrice": 500 },
-      ],
-    })
-    .select({ bookName: 1, price: 1, _id: 0 });
+    .find({ "price.indianPrice": { $in: ["100INR", "200INR", "500INR"] } })
+    .select({ bookName: 1, _id: 0, price: 1 });
   res.send({ Book: booksINR });
 };
 
 const getRandomBooks = async function (req, res) {
   let books = await bookModel
-    .find({ totalPages: { $gt: 500 } }, { stockAvailable: true })
-    .select({ _id: 0, bookName: 1, totalPages: 1 });
+    .find({ $and: [{ totalPages: { $gt: 500 } }, { stockAvailable: true }] })
+    .select({ _id: 0, bookName: 1, totalPages: 1, stockAvailable: 1 });
 
   res.send({ Book: books });
 };
 
 const getParticularBook = async function (req, res) {
-  const year = req.query.year;
-  const bookName = req.query.name;
-  const authorName = req.query.author;
-
-  //BELIEVE ME I WROTE THIS CODE.
-  if (year && bookName && authorName) {
-    let books = await bookModel.find({
-      $and: [{ year }, { bookName }, { authorName }],
-    }).select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  } else if (year && bookName) {
-    let books = await bookModel.find({ $and: [{ year }, { bookName }]}).select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  } else if (year && authorName) {
-    let books = await bookModel.find({ $and: [{ year }, { authorName }] }).select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  } else if (authorName && bookName) {
-    let books = await bookModel.find({ $and: [{ authorName }, { bookName }] }).select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  } else if (year) {
-    let books = await bookModel.find({ year }).select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  } else if (bookName) {
-    let books = await bookModel
-      .find({ bookName })
-      .select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  } else if (authorName) {
-    let books = await bookModel
-      .find({ authorName })
-      .select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  } else {
-    let books = await bookModel.find().select({ _id: 0, bookName: 1 });
-    res.send({ Book: books });
-  }
+  const search = req.body;
+  const result = await bookModel.find(search).select({ _id: 0, bookName: 1 });
+  res.send({ Book: result });
 };
 
 module.exports.createBook = createBook;
