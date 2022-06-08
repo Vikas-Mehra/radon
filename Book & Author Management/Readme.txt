@@ -1,12 +1,18 @@
-Assignment :
-Create a books collection in your DB ( using bookModel with following fields)- bookName( mandatory field), price containing Indian and european price, year ( should be 2021 if no year is provided) , tags array, authorName, totalPages , stockAvailable ( true false). 
-Create the following API’s (write logic in bookController and routes in routes):
-1. createBook : to create a new entry..use this api to create 11+ entries in your collection
-2. bookList : gives all the books- their bookName and authorName only 
-3. getBooksInYear: takes year as input in post request and gives list of all books published that year
-4. getParticularBooks:- (this is a good one, make sincere effort to solve this) take any input and use it as a condition to fetch books that satisfy that condition
-  e.g if body had { name: “hi”} then you would fetch the books with this name
-  if body had { year: 2020} then you would fetch the books in this year
-  hence the condition will differ based on what you input in the request body
-5. getXINRBooks- request to return all books who have an Indian price tag of “100INR” or “200INR” or “500INR” 
-6. getRandomBooks - returns books that are available in stock or have more than 500 pages
+# radon
+Backend Cohort, May 2022-Sep 2022
+
+ASSIGNMENT: Books and Authors - MongoDB
+[Created 6 API's]:
+1. Write create APIs for both books and authors ---> If author_id is not available then do not accept the entry(in neither the author collection nor the books collection).
+
+2.List out the books written by "Chetan Bhagat".
+
+3.find the author of “Two states” and update the book price to 100;  Send back the author_name and updated price in response.
+
+4.Find the books which costs between 50-100(50,100 inclusive) and respond back with the author names of respective books.
+
+5. Write an api GET /books-by-authorid/<Author_Id> (for example /books/1 or /books/2 etc) that returns all the books written by the author with an id <Author_Id>. Only return the names of these books.
+
+6. Find a list of authors whose are older than 50 years of age with at least one book that has a rating greater than 4. Only include the author’s names and their ages in the response for this api.
+
+
