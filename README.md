@@ -1,8 +1,8 @@
 # radon
 Backend Cohort, May 2022-Sep 2022
 
-ASSIGNMENT: Books and Authors - MongoDB
-[Created 6 API's]:
+ASSIGNMENT: Books and Authors - MongoDB [Created 6 API's]:
+
 1. Write create APIs for both books and authors ---> If author_id is not available then do not accept the entry(in neither the author collection nor the books collection).
 
 2.List out the books written by "Chetan Bhagat".
