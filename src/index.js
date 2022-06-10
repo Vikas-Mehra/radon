@@ -2,10 +2,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const route = require("./routes/route.js");
 const { default: mongoose } = require("mongoose");
+
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
+const dateIpRoute = require('./middlewares/dateIpRoute');
+app.use(dateIpRoute.dateIpRoute);
+
 
 mongoose
   .connect(
@@ -14,8 +20,9 @@ mongoose
       useNewUrlParser: true,
     }
   )
-  .then(() => console.log("MongoDb is connected"))
+  .then(() => console.log("MongoDB is connected."))
   .catch((err) => console.log(err));
+
 
 app.use("/", route);
 

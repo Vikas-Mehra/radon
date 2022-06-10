@@ -64,7 +64,7 @@ const getPopulatedBooks = async function (req, res) {
 // 5. Create a new PUT API /books and perform the following two operations: 
 // (a) For the books published by 'Penguin' and 'HarperCollins', update this key to true.
 const books = async function (req,res){
-  const update = await bookModel.updateMany({$or: [{"publisher":"61951bfa4d9fe0d34da84523" },{"publisher": "62a1e8126db4bd6181d6826a"}]},{"isHardCover" : false},{new:true});
+  const update = await bookModel.updateMany({$or: [{"publisher":"61951bfa4d9fe0d34da84523" },{"publisher": "62a1e8126db4bd6181d6826a"}]},{"isHardCover" : true},{new:true});
    res.send({ PUT_API: update });
 }
 
