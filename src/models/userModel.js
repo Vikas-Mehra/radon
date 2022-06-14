@@ -1,29 +1,35 @@
 const mongoose = require("mongoose");
-
-const userSchema = new mongoose.Schema({
-  name: String,
-  balance: {
-    type: Number,
-    default: 100,
+const userSchema = new mongoose.Schema(
+  {
+    firstName: String,
+    lastName: String,
+    mobile: {
+      type: String,
+      required: true,
+    },
+    emailId: String,
+    password: String,
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    age: Number,
   },
+  { timestamps: true }
+);
 
-  address: String,
-  age: Number,
-  gender: {
-    type: String,
-    enum: ["male", "female", "other"],
-  },
-  isFreeAppUser: {
-    type: Boolean,
-    default: false,
-  },
-});
-
-module.exports = mongoose.model("Client", userSchema);
+module.exports = mongoose.model("newUser", userSchema);
 
 // {
-//     "name": "V. Bansal",
-//     "address": "New Delhi",
-//     "age": "35",
-//     "gender":"male"
+//     "firstName": "Akash",
+//     "lastName": "Moon",
+//     "mobile": "9284029768",
+//     "emailId": "moon@gmail.com",
+//     "password": "abc123",
+//     "gender": "male",
+//     "age": "21"
 // }
