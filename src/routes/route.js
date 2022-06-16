@@ -4,7 +4,7 @@ const userController = require("../controllers/userController");
 const postController = require("../controllers/postController");
 const auth = require("../Middleware/auth");
 
-router.post("/users", userController.createUser);
+router.post("/createUser", userController.createUser);
 router.post("/login", userController.loginUser);
 router.get(
   "/users/:userId",
@@ -25,7 +25,7 @@ router.delete(
   userController.deleteUser
 );
 router.put(
-  "/addPost/:userId",
+  "/users/:userId/posts",
   auth.authenticate,
   auth.authorise,
   postController.createPost
